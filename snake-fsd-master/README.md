@@ -206,7 +206,7 @@ The `apple.element` Object will be needed in order to make any modifications to 
 >    * position on the board that is not occupied and position the apple there.
 >    */
 >   function makeApple() {
->     // make the apple jQuery Object and append it to the board
+>      // make the apple jQuery Object and append it to the board
 >     apple.element = $("<div>").addClass("apple").appendTo(board);
 >
 >     // get a random available row/column on the board
