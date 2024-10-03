@@ -83,17 +83,17 @@ function checkForNewDirection(event) {
   BONUS: Only allow direction changes to take place if the new direction is
   perpendicular to the current direction
   */
-  if (activeKey === KEY.UP) {
-    snake.head.direction = "up";
-  }
   if (activeKey === KEY.LEFT) {
     snake.head.direction = "left";
   }
-  if (activeKey === KEY.DOWN) {
-    snake.head.direction = "down";
+  if(activeKey === KEY.RIGHT){
+    snake.head.direction = "right"
   }
-  if (activeKey === KEY.RIGHT) {
-    snake.head.direction = "right";
+  if(activeKey === KEY.DOWN){
+    snake.head.direction = "down"
+  }
+  if(activeKey === KEY.UP){
+    snake.head.direction = "up"
   }
 
   // FILL IN THE REST
@@ -120,26 +120,9 @@ function moveSnake() {
   HINT: The snake's head will need to move forward 1 square based on the value
   of snake.head.direction which may be one of "left", "right", "up", or "down"
   */
-  if (snake.head.direction === "left") {
-    snake.head.column = snake.head.column - 1;
+ 
   }
-  repositionSquare(snake.head)
 
-  if (snake.head.direction === "right") {
-    snake.head.column = snake.head.column + 1;
-  }
-  repositionSquare(snake.head)
-
-  if (snake.head.direction === "up") {
-    snake.head.row = snake.head.row - 1;
-    repositionSquare(snake.head)
-
-    if(snake.head.direction === "down"){
-      snake.head.row = snake.head.row + 1;
-      repositionSquare(snake.head)
-    }
-  }
-}
 
 function hasHitWall() {
   /* 
