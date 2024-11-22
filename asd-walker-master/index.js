@@ -21,7 +21,7 @@ function runProgram() {
   // Game Item Objects
   var walker = {
     positionX: 0,
-    positiony: 0,
+    positionY: 0,
     speedX: 0,
     speedY: 0,
   };
@@ -29,7 +29,7 @@ function runProgram() {
   // one-time setup
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
   $(document).on('keydown', handleKeyDown);                           // change 'eventType' to the type of event you want to handle
-
+  $(document).on('keyup', handleKeyUp);
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
@@ -48,39 +48,57 @@ function runProgram() {
   /* 
   Called in response to events.
   */
-  //Recognizes which key is being pressed. 
+  //Recognizes which key is being pressed and moves accordingly.
   function handleKeyDown(event) {
     if (event.which === KEY.ENTER) {
       console.log("enter pressed")
     }
     if (event.which === KEY.LEFT) {
-      console.log("left pressed")
+      walker.speedX = -5;
     }
     if (event.which === KEY.RIGHT) {
-      console.log("right pressed")
+      walker.speedX = 5;
     }
     if (event.which === KEY.UP) {
-      console.log("up pressed")
+      walker.speedY = -5;
     }
     if (event.which === KEY.DOWN) {
-      console.log("down pressed")
+      walker.speedY = 5;
     }
-    console.log(event.key)
   }
 
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
-  function repositionGameItem(){
-    walker.positionX += walker.speedX
+  ///Stops the gamepiece from moving after the key is released
+  function handleKeyUp(event){
+    if (event.which === KEY.LEFT) {
+      walker.speedX = 0;
+    }
+    if (event.which === KEY.RIGHT) {
+      walker.speedX = 0;
+    }
+    if (event.which === KEY.UP) {
+      walker.speedY = 0;
+    }
+    if (event.which === KEY.DOWN) {
+      walker.speedY = 0;
+    }
+  }
 
-    walker.positionY += walker.speedY
+  ///Causes the game piece to chnage its x and y positions
+  function repositionGameItem() {
+    walker.positionX += walker.speedX;
+
+    walker.positionY += walker.speedY;
   };
 
-  function redrawGameItem(){
-    $("#box").css("left", walker.positionX)
-    $("#box").css("top", walker.positionY)
+  ///Redraws the gamepiece at the new x and y positions
+  function redrawGameItem() {
+    $("#walker").css("left", walker.positionX);
+  
+    $("#walker").css("top", walker.positionY);
   }
 
   function endGame() {
