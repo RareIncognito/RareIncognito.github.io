@@ -77,7 +77,7 @@ function update() {
   }
 }
 
-function checkForNewDirection(event) {
+function checkForNewDirection() {
   /* 
   TODO 6b: Update snake.head.direction based on the value of activeKey.
   BONUS: Only allow direction changes to take place if the new direction is
@@ -141,24 +141,24 @@ function moveSnake() {
 
 }
 
-  /* 
-  TODO 7: determine the next row and column for the snake's head
-  HINT: The snake's head will need to move forward 1 square based on the value
-  of snake.head.direction which may be one of "left", "right", "up", or "down"
-  */
-  if (snake.head.direction === "left") {
-    snake.head.column = snake.head.column - 1;
-  }
-  if (snake.head.direction === "right") {
-    snake.head.column = snake.head.column + 1;
-  }
-  if (snake.head.direction === "up") {
-    snake.head.row = snake.head.row - 1;
-  }
-  if (snake.head.direction === "down") {
-    snake.head.row = snake.head.row + 1;
-  }
-  repositionSquare(snake.head);
+/* 
+TODO 7: determine the next row and column for the snake's head
+HINT: The snake's head will need to move forward 1 square based on the value
+of snake.head.direction which may be one of "left", "right", "up", or "down"
+*/
+if (snake.head.direction === "left") {
+  snake.head.column = snake.head.column - 1;
+}
+if (snake.head.direction === "right") {
+  snake.head.column = snake.head.column + 1;
+}
+if (snake.head.direction === "up") {
+  snake.head.row = snake.head.row - 1;
+}
+if (snake.head.direction === "down") {
+  snake.head.row = snake.head.row + 1;
+}
+repositionSquare(snake.head);
 
 
 
@@ -249,7 +249,14 @@ function hasCollidedWithSnake() {
   head and each part of the snake's body also knows its own row and column.
   
   */
-
+  for (var i = 1; i < snake.body.length; i++) {
+    var snakeSquare = snake.body[i]
+    if (snake.head.row === snakeSquare.row) {
+      if (snake.head.column === snakeSquare.column) {
+        return true
+      }
+    }
+  }
   return false;
 }
 
@@ -361,6 +368,15 @@ function getRandomAvailablePosition() {
 
   /* Generate random positions until one is found that doesn't overlap with the snake */
   while (!spaceIsAvailable) {
+    for (var i = 0; i < snake.body.length; i++) {
+      var snakeSquare = snake.body[i]
+
+      if(randomPosition.row === snakeSquare.row){
+        if(randomPosition.column === snakeSquare.column){
+          spaceIsAvailable = false
+        }
+      }
+    }
     randomPosition.column = Math.floor(Math.random() * COLUMNS);
     randomPosition.row = Math.floor(Math.random() * ROWS);
     spaceIsAvailable = true;
