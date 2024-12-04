@@ -40,7 +40,7 @@ function runProgram() {
   */
   function newFrame() {
     repositionGameItem()
-
+    wallCollision()
     redrawGameItem()
 
   }
@@ -71,6 +71,20 @@ function runProgram() {
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
+  ///Adds wall collision
+  function wallCollision(){
+    if(walker.positionX >= $("#board").width()-45){
+      walker.positionX = walker.positionX - walker.speedX
+    }else if (walker.positionX <= -5){
+      walker.positionX = walker.positionX - walker.speedX
+    }
+
+    if(walker.positionY >= $("#board").height()-45){
+      walker.positionY = walker.positionY - walker.speedY
+    }else if(walker.positionY <= -5){
+      walker.positionY = walker.positionY - walker.speedY
+    }
+  }
   ///Stops the gamepiece from moving after the key is released
   function handleKeyUp(event){
     if (event.which === KEY.LEFT) {
@@ -101,6 +115,7 @@ function runProgram() {
     $("#walker").css("top", walker.positionY);
   }
 
+  ///Ends the game
   function endGame() {
     // stop the interval timer
     clearInterval(interval);
