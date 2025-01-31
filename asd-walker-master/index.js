@@ -38,6 +38,7 @@ function runProgram() {
   On each "tick" of the timer, a new frame is dynamically drawn using JavaScript
   by calling this function and executing the code inside.
   */
+ //Creates each new frame
   function newFrame() {
     repositionGameItem()
     wallCollision()
@@ -51,7 +52,6 @@ function runProgram() {
   //Recognizes which key is being pressed and moves accordingly.
   function handleKeyDown(event) {
     if (event.which === KEY.ENTER) {
-      console.log("enter pressed")
     }
     if (event.which === KEY.LEFT) {
       walker.speedX = -5;
