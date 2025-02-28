@@ -20,10 +20,9 @@ function resetAndRender() {
 // all of your apply functions
 function applyAndRender() {
   // Multiple TODOs: Call your apply function(s) here
-  applyFilter(reddify)
-  applyFilter(decreaseBlue)
-  applyFilter(increaseGreenByBlue)
-  
+  applyFilter(reddify);
+  applyFilter(decreaseBlue);
+  applyFilter(increaseGreenByBlue);
   // do not change the below line of code
   render($("#display"), image);
 }
@@ -47,18 +46,7 @@ function applyFilter(filterFunction) {
 }
 
 // TODO 7: Create the applyFilterNoBackground function
-function applyFilterNoBackground() {
-  for (i = 0; i < image.length; i++) {
-    for (j = 0; j < image[i].length; j++) {
-      var rgbString = image[i][j]
-      var rgbNumbers = rgbStringToArray(rgbString)
-      filterFunction(rgbNumbers)
-      rgbString = rgbArrayToString(rgbNumbers)
-      image[i][j] = rgbString
 
-    }
-  }
-}
 
 // TODO 5: Create the keepInBounds function
 function keepInBounds(bound) {
@@ -72,11 +60,13 @@ function reddify(epic) {
 }
 
 // TODO 6: Create more filter functions
-function decreaseBlue(amount) {
-  amount[BLUE] = keepInBounds(amount[BLUE] - 50)
+// Reduces the amount BLUE in the RGB array
+function decreaseBlue(blueArray){
+  blueArray[BLUE] = keepInBounds(blueArray[BLUE] - 50)
 }
 
-function increaseGreenByBlue(diffArray) {
-  diffArray[GREEN] = keepInBounds(diffArray[GREEN] + diffArray[BLUE])
+//Increase the amount of GREEN in the RGB array in relation to the amount of BLUE in the array.
+function increaseGreenByBlue(greenArray){
+  greenArray[GREEN] = keepInBounds(greenArray[BLUE] + greenArray[GREEN])
 }
 // CHALLENGE code goes below here
